@@ -8,7 +8,6 @@ export DEFAULT_USER=$USER
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-export DOTFILES=${DOTFILES:-"$HOME/dev/github.com/nblagoev/dotfiles"}
 export GIT_CLONEP_PATH="$HOME/dev"
 #export TERM=xterm-256color-italic
 export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -31,7 +30,7 @@ export BAT_THEME="TwoDark"
 
   # Add custom bin to $PATH
   [ -d ~/.bin ] && _extend_path "$HOME/.bin"
-  [ -d $DOTFILES/bin ] && _extend_path "$DOTFILES/bin"
+  [ -d ~/.local/bin ] && _extend_path "~/.local/bin"
   #[ -d ~/.npm-global ] && _extend_path "~/.npm-global/bin"
 # }}}
 
