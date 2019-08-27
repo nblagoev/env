@@ -26,7 +26,11 @@ if [ "$system_type" = "Darwin" ]; then
 
   # Setup defaults
   echo "Setting macOS defaults"
-  source "$HOME/.yadm/install/defaults"
+  source "$HOME/.install/scripts/defaults"
+
+  # Install fonts
+  echo "Installing fonts to $HOME/Library/Fonts"
+  cp -vf $HOME/.install/fonts/*.ttf $HOME/Library/Fonts
 
   # Static Environment Configuration - FZF
   export FZF_HOME=$(brew --prefix fzf)

@@ -1,0 +1,25 @@
+echo "# Ensure system is up to date"
+sudo apk update && sudo apk upgrade && sudo apk add git curl
+
+echo "# Installing yadm"
+mkdir -p ~/.local/bin
+curl -fLo ~/.local/bin/yadm \
+	https://github.com/TheLocehiliosan/yadm/raw/master/yadm
+chmod a+x ~/.local/bin/yadm
+
+echo "Cloning the repo"
+~/.local/bin/yadm clone git@github.com:nblagoev/env.git
+~/.local/bin/yadm submodule update --init --recursive
+
+echo "Install zsh and set as default shell"
+sudo apt-get install zsh
+chsh -s /bin/zsh
+
+echo "Installing brew"
+git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
+mkdir ~/.linuxbrew/bin
+ln -s ../Homebrew/bin/brew ~/.linuxbrew/bin
+eval $(~/.linuxbrew/bin/brew shellenv)
+
+echo "Using yadm bootstrap to complete setup"
+~/.local/bin/yadm bootstrap

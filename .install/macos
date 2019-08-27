@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo "# Installing Homebrew"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+echo "# Installing yadm"
+brew install yadm
+yadm clone https://github.com/nblagoev/env.git --no-bootstrap
+yadm submodule update --recursive
+
+echo "Using yadm bootstrap to complete setup"
+yadm bootstrap
