@@ -1,0 +1,156 @@
+{
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "breadcrumbs.enabled": true,
+
+  "diffEditor.ignoreTrimWhitespace": true,
+  "diffEditor.renderSideBySide": true,
+
+  "editor.cursorBlinking": "phase",
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.fontFamily": "'Fira Code', 'Source Code Pro', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.insertSpaces": false,
+  "editor.minimap.maxColumn": 150,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.showSlider": "always",
+  "editor.renderControlCharacters": false,
+  "editor.smoothScrolling": true,
+  "editor.snippetSuggestions": "bottom",
+  "editor.suggestSelection": "first",
+  // "editor.suggest.filterGraceful": true,
+  // "editor.suggest.localityBonus": true,
+  // "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "editor.wordWrapColumn": 120,
+  "editor.renderWhitespace": "selection",
+
+  "explorer.autoReveal": false,
+  "explorer.openEditors.visible": 0,
+
+  "extensions.autoUpdate": true,
+  "extensions.ignoreRecommendations": false,
+
+  "files.autoSave": "onFocusChange",
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    ".git": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "githubPullRequests.showInSCM": true,
+
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+  },
+  "gitlens.views.compare.location": "scm",
+  "gitlens.views.fileHistory.location": "scm",
+  "gitlens.views.lineHistory.enabled": false,
+  "gitlens.views.lineHistory.location": "scm",
+  "gitlens.views.repositories.files.layout": "tree",
+  "gitlens.views.repositories.location": "scm",
+  "gitlens.views.search.enabled": false,
+  "gitlens.views.search.location": "scm",
+
+  "problems.decorations.enabled": true,
+  "search.exclude": {
+    "**/bower_components": true,
+    "**/node_modules": true,
+    "**/out/**": true,
+    "**/target/**": true,
+    ".build/**": true,
+    ".idea/**": true,
+    ".settings/**": true,
+    "extensions/**/out/**": true,
+    "i18n/**": true,
+    "logs/**": true
+  },
+
+  "sync.askGistName": false,
+  "sync.autoDownload": false,
+  "sync.autoUpload": true,
+  "sync.forceDownload": false,
+  "sync.gist": "b851d45f7922608de393eaf3f765c6a6",
+  "sync.quietSync": true,
+  "sync.removeExtensions": true,
+  "sync.syncExtensions": true,
+
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+
+  "terminal.external.osxExec": "/usr/local/bin/zsh",
+  "terminal.integrated.env.osx": {
+    "AUTOSTART_TMUX": "no"
+  },
+  "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
+
+  "typescript.updateImportsOnFileMove.enabled": "never",
+
+  "vrdev.experimental.typescript": true,
+  "vrdev.tasks.exclude": ["com.vmware.pscoe.library*"],
+  "vrdev.views.explorer.actions.layout": "compact",
+
+  "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
+  "window.zoomLevel": 0,
+
+  "workbench.octiconsUpdate.enabled": true,
+  "workbench.colorCustomizations": {
+    "[Monokai Pro]": {
+      "gitDecoration.modifiedResourceForeground": "#fc9867",
+      "gitDecoration.untrackedResourceForeground": "#a9dc76",
+      "statusBar.debuggingBackground": "#fc9867",
+      "statusBar.debuggingForeground": "#4d4c4e"
+    }
+  },
+  "workbench.editor.closeOnFileDelete": false,
+  "workbench.dialogs.useSimplified": true,
+  "workbench.iconTheme": "eq-material-theme-icons-darker",
+  "workbench.settings.editor": "json",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.statusBar.feedback.visible": false,
+
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[go]": {
+    "editor.snippetSuggestions": "none",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "go.useLanguageServer": true,
+  "go.languageServerExperimentalFeatures": {
+    "diagnostics": true
+  },
+  "gopls": {
+    "usePlaceholders": true, // add parameter placeholders when completing a function
+    "enhancedHover": true // experimental to improve quality of hover (will be on by default soon)
+  },
+
+  "workbench.colorTheme": "Monokai Pro",
+
+  "prettier.printWidth": 120,
+  "prettier.tabWidth": 4,
+  "prettier.quoteProps": "consistent",
+  "prettier.endOfLine": "lf",
+  "vrdev.buildTools.defaultVersion": "1.5.23",
+  "explorer.confirmDelete": false
+}
