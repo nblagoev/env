@@ -1,0 +1,243 @@
+[user]
+	name = Nikolay Blagoev
+	email = blagoevn@vmware.com
+	signingkey = B7C126E00C2CBA4D
+
+[init]
+	templatedir = ~/dev/github.com/nblagoev/dotfiles/git/templates
+
+[alias]
+	# Staging
+	a 			= add
+	aa 			= add --all
+
+	# Branch
+	br 			= branch
+	branch-name = rev-parse --abbrev-ref HEAD
+	branch-diff = diff master...HEAD
+	branch-files = "!git diff master...HEAD --name-status | sed '/^D/d ; s/^.\\s\\+//'"
+
+	# Commit
+	c 			= commit
+	ca 			= commit -a
+	cm 			= commit -m
+	cal 		= !git add -A && git commit              # Commit all changes
+	cam 		= commit -am
+	cne 		= commit --no-edit
+	amend 		= commit --amend
+	amend-all 	= !git add --all && git commit --amend --reuse-message=HEAD
+
+	# Clone
+	cl 			= clone
+	sclone 		= clone --depth=1
+
+	# Checkout
+	co 			= checkout
+	cb 			= checkout -b
+
+	# Cherry-pick
+	cp 			= cherry-pick
+
+	# Diff
+	d 			= diff
+	dc 			= diff --cached
+	dw 			= diff --word-diff
+	dt 			= difftool
+	ds			= diff --stat -r
+
+	# Merge
+	m = merge
+
+	# Pull
+	up 			= pull
+	plom 		= pull origin master
+
+	# Push
+	p 			= push
+	pom 		= push origin master
+	# Push the current branch to the remote "origin", and set it to track
+	# the upstream branch
+	pub         = "!git push -u origin $(git branch-name)"
+	# Delete the remote version of the current branch
+	unpub       = "!git push origin :$(git branch-name)"
+
+	# Status/Logging
+	st			= status -sb
+	last    	= log -1 HEAD
+	l 			= log --pretty=custom2
+	lg 			= log --graph --pretty=custom2 --abbrev-commit --date=relative
+	ll 			= log --stat --abbrev-commit
+	lc 			= shortlog --summary --numbered # List contributors
+	filelog     = log -u
+	heir 		= log --all --graph --decorate --oneline --simplify-by-decoration
+	today   	= log --since=midnight --color --graph \
+					--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
+					--abbrev-commit
+  	yesterday 	= log --since yesterday --until=midnight --color --graph \
+					--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
+					--abbrev-commit
+
+	# Reset
+	undo		= reset --hard
+	uncommit	= reset HEAD~1 --mixed # Resets the previous commit, but keeps all the changes from that commit in the WD
+	unstage		= reset HEAD # Unstage any files that have been added to the staging area
+	restore		= checkout --
+	undocommit	= reset --hard HEAD~1
+	untrack 	= rm --cached --
+
+	# Remote
+    r 			= remote -v
+
+    # Submodules
+	subpull 	= submodule update --init --recursive
+
+	# Assumptions
+
+	assume   = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+
+	# Snapshots
+
+	# via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+  	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+	snapshots = !git stash list --grep snapshot
+
+	# Pull Requests (https://gist.github.com/gnarf/5406589)
+	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+	# for bitbucket/stash remotes
+	pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull-requests/$1/from:pr/$1 && git checkout pr/$1; }; f"
+	# for github remores
+	gpr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+
+	# Misc
+
+	# show what I did today
+    day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
+    # show the committers in the last 100 commits, sorted by who has commited the most
+	review = "!git log --no-merges --pretty=%an | head -n 100 | sort | uniq -c | sort -nr"
+	# Deletes all branches already merged into master.
+	bclean      = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+	#via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
+	# show the most recently touched branches
+    recent = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/heads | sed -e 's-refs/heads/--' | less -XFR"
+	latest = "!git for-each-ref --sort='-committerdate' --format='%(color:red)%(refname)%(color:reset)%09%(committerdate)' refs/remotes | sed -e 's-refs/remotes/origin/--' | less -XFR"
+	ignored 	= !git ls-files -ci --exclude-standard
+	lasttag 	= describe --tags --abbrev=0
+	findtodo 	= grep --line-number --word-regexp TODO
+	la          = "!git config -l | grep alias | cut -c 7-"
+	cleanup     = !git remote prune origin && git gc && git clean -dfx && git stash clear
+	ignore      = "!([ ! -e .gitignore ] && touch .gitignore) | echo `\n$2` >> .gitignore"
+	stat        = !git ls-files | xargs wc -l # How many lines in repo
+	release     = !sh "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-release.sh"
+  	setup       = !zsh "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-setup.sh"
+  	summary     = !zsh "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-summary.sh"
+	ghfork      = !sh "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-ghpull.sh"
+	clonep      = !python3 "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-clonep"
+
+
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	# Merge repo
+	mergeRepo   = "!mergeRepo() { \
+						[ $# -ne 3 ] && echo \"Three parameters required, <remote URI> <new branch> <new dir>\" && exit 1; \
+						git remote add newRepo $1; \
+						git fetch newRepo; \
+						git branch \"$2\" newRepo/master; \
+						git checkout \"$2\"; \
+						mkdir -vp \"${GIT_PREFIX}$3\"; \
+						git ls-tree -z --name-only HEAD | xargs -0 -I {} git mv {} \"${GIT_PREFIX}$3\"/; \
+						git commit -m \"Moved files to '${GIT_PREFIX}$3'\"; \
+						git checkout master; git merge --allow-unrelated-histories --no-edit -s recursive -X no-renames \"$2\"; \
+						git branch -D \"$2\"; git remote remove newRepo; \
+				   }; \
+				   mergeRepo"
+
+[color]
+	ui = always
+
+[color "diff"]
+	frag = magenta
+	meta = yellow
+	new = green
+	old = red
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+
+[color "status"]
+    added = green
+    changed = yellow
+	untracked = red
+
+[color "branch"]
+	current = green bold
+	local = green
+	remote = yellow
+	plain = normal
+
+[pretty]
+	custom = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset"
+	custom2 = "%Cred%h%Creset %C(bold blue)%an%C(reset) - %s %Creset%C(yellow)%d%Creset %Cgreen(%cr)%Creset"
+
+[push]
+	default = simple
+	# Make `git push` automatically push relevant
+	# annotated tags when pushing branches out
+	followTags = true
+
+[merge]
+	tool = vscode
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+
+[mergetool "intellij"]
+    cmd = idea merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
+    trustExitCode = true
+
+[diff]
+    tool = vscode
+
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
+[difftool "intellij"]
+    cmd = idea diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+
+[mergetool]
+	keepTemporaries = true
+	prompt = false
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore
+	autocrlf = input
+	gnorecase = false
+	hooksPath = ~/dev/github.com/nblagoev/dotfiles/git/templates/hooks
+
+[pager]
+	# Insanely beautiful diffs ==> npm install -g diff-so-fancy
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+
+# URL shorthands
+# gh:paulmillr/dotfiles
+[url "git@github.com:"]
+	insteadOf = "gh:"
+	pushInsteadOf = "gh:"
+	pushInsteadOf = "git://github.com/"
+
+# gist:3928760
+[url "git@gist.github.com:"]
+	insteadOf = "gist:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
