@@ -18,10 +18,10 @@ if [ "$system_type" = "Darwin" ]; then
   fi
 
   # Install/update brew bundle
-  if [ -f "$HOME/.Brewfile" ]; then
+  if [ -f "$HOME/.install/packages/Brewfile" ]; then
     echo "Updating homebrew bundle"
     brew update
-    brew doctor && brew bundle --global
+    brew doctor && brew bundle --file "$HOME/.install/packages/Brewfile"
   fi
 
   # Setup defaults
@@ -48,6 +48,11 @@ if [ "$system_type" = "Darwin" ]; then
 
   echo "" >> "$host_env_static"
   echo "" >> "$host_env_static"
+else
+  echo "Installing system utilities..."
+  if command -v apk >/dev/null 2>&1; then
+      sudo apk add --no-cache $(sed -e '/\s*#.*/d' ${HOME}/.install/packages/apk.txt)
+  fi
 fi
 
 # Setup ZSH
@@ -65,6 +70,23 @@ if [ -f "$HOME/.zcompdump" ]; then
   rm "$HOME/.zcompdump"
 fi
 zsh -c 'source $HOME/.zshrc && autoload -U compinit && compinit'
+
+# Install pip and python packages
+if [ "$(id -u)" != "0" ] && command -v sudo; then
+    SUDO=sudo
+fi
+
+if ! command -v python && command -v python3 >/dev/null 2>&1; then
+    $SUDO ln -s /usr/bin/python3 /usr/bin/python
+fi
+
+if command -v python >/dev/null 2>&1; then
+    if ! command -v pip >/dev/null 2>&1; then
+        curl -fsSL https://bootstrap.pypa.io/get-pip.py | $SUDO python
+    fi
+    $SUDO python -m pip install --upgrade --force-reinstall pip
+    $SUDO pip install -r "$HOME/.install/packages/pip.txt"
+fi
 
 # Bootstrap nvim
 if command -v nvim >/dev/null 2>&1; then
@@ -100,12 +122,5 @@ if [ ! -d "$HOME/go" ]; then
 fi
 
 # Bootstrap Node
-packages=(
-    gulp
-    http-server
-    servedir
-    nodemon
-    diff-so-fancy
-)
 n stable
-npm install -g "${packages[@]}"
+npm install -g $(sed -e '/\s*#.*/d' ${HOME}/.install/packages/npm.txt)
