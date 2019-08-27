@@ -1,0 +1,6 @@
+.ssh/id_*
+.ssh/config
+.gnupg/*.{gpg,kbx}
+.gnupg/*.d/*
+.kube/config
+.m2/settings.xml
