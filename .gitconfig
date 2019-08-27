@@ -4,7 +4,7 @@
 	signingkey = B7C126E00C2CBA4D
 
 [init]
-	templatedir = ~/dev/github.com/nblagoev/dotfiles/git/templates
+	templatedir = ~/.config/git/templates
 
 [alias]
 	# Staging
@@ -129,11 +129,11 @@
 	cleanup     = !git remote prune origin && git gc && git clean -dfx && git stash clear
 	ignore      = "!([ ! -e .gitignore ] && touch .gitignore) | echo `\n$2` >> .gitignore"
 	stat        = !git ls-files | xargs wc -l # How many lines in repo
-	release     = !sh "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-release.sh"
-  	setup       = !zsh "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-setup.sh"
-  	summary     = !zsh "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-summary.sh"
-	ghfork      = !sh "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-ghpull.sh"
-	clonep      = !python3 "$HOME/dev/github.com/nblagoev/dotfiles/git/extras/git-clonep"
+	release     = !sh "$HOME/.config/git/extras/git-release.sh"
+  	setup       = !zsh "$HOME/.config/git/extras/git-setup.sh"
+  	summary     = !zsh "$HOME/.config/git/extras/git-summary.sh"
+	ghfork      = !sh "$HOME/.config/git/extras/git-ghpull.sh"
+	clonep      = !python3 "$HOME/.config/git/extras/git-clonep"
 
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -217,7 +217,7 @@
 	excludesfile = ~/.gitignore
 	autocrlf = input
 	gnorecase = false
-	hooksPath = ~/dev/github.com/nblagoev/dotfiles/git/templates/hooks
+	hooksPath = ~/.config/git/templates/hooks
 
 [pager]
 	# Insanely beautiful diffs ==> npm install -g diff-so-fancy
