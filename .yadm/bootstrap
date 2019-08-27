@@ -1,0 +1,107 @@
+#!/bin/bash
+cd "$HOME"
+
+system_type=$(uname -s)
+
+# Static Environment Configuration
+#   I found that some evaluations take time and slow down the loading of zsh, therefore,
+#   instead of evaluating in ~/.zshrc, I will do that during the bootstrap process.
+host_env_static="$HOME/.shell.d/00-env-host-static.sh"
+rm -f "$host_env_static"
+
+# Bootstrap MacOS
+if [ "$system_type" = "Darwin" ]; then
+  # Install homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  # Install/update brew bundle
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating homebrew bundle"
+    brew update
+    brew doctor && brew bundle --global
+  fi
+
+  # Setup defaults
+  echo "Setting macOS defaults"
+  source "$HOME/.yadm/install/defaults"
+
+  # Static Environment Configuration - FZF
+  export FZF_HOME=$(brew --prefix fzf)
+  $FZF_HOME/install --no-bash --no-fish --completion --key-bindings --no-update-rc
+  echo "# FZF Configuration" >> "$host_env_static"
+  echo "export FZF_HOME=$FZF_HOME" >> "$host_env_static"
+  echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> "$host_env_static"
+
+  echo "" >> "$host_env_static"
+  echo "" >> "$host_env_static"
+
+  # Static Environment Configuration - grc
+  echo "# grc - generic colouriser for everything" >> "$host_env_static"
+  echo "source $(brew --prefix)/etc/grc.zsh" >> "$host_env_static"
+
+  echo "" >> "$host_env_static"
+  echo "" >> "$host_env_static"
+fi
+
+# Setup ZSH
+ZSH_PATH=$(which zsh)
+
+if grep -Fxq "$ZSH_PATH" /etc/shells; then
+  echo "ZSH already in /etc/shells"
+else
+  [ -f "$ZSH_PATH" ] && sudo sh -c "echo $(which zsh) >> /etc/shells" && chsh -s "$ZSH_PATH" && echo "ZSH added to /etc/shells"
+fi
+
+# Re-Create zsh completion
+echo "Recreating ZSH completion"
+if [ -f "$HOME/.zcompdump" ]; then
+  rm "$HOME/.zcompdump"
+fi
+zsh -c 'source $HOME/.zshrc && autoload -U compinit && compinit'
+
+# Bootstrap nvim
+if command -v nvim >/dev/null 2>&1; then
+  pip2 install neovim --upgrade
+  pip3 install neovim --upgrade
+
+  # Install all plugins
+  echo "Bootstraping Nvim"
+  nvim +PlugInstall
+fi
+
+# Bootstrap tmux
+if command -v tmux >/dev/null 2>&1; then
+  echo "Bootstrapping tmux"
+  if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    # installing tmux-plugin-manager and plugins
+    mkdir "$HOME/.tmux/plugins"
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+    "$HOME"/.tmux/plugins/tpm/bin/install_plugins
+  else
+    # updating tpm and plugins
+    cd "$HOME/.tmux/plugins/tpm"
+    git pull -p
+    cd "$HOME"
+    "$HOME"/.tmux/plugins/tpm/bin/update_plugins all
+  fi
+fi
+
+# Bootstrap Go
+if [ ! -d "$HOME/go" ]; then
+  mkdir $HOME/go
+  mkdir -p $HOME/go/bin $HOME/go/pkg $HOME/go/src
+fi
+
+# Bootstrap Node
+packages=(
+    gulp
+    http-server
+    servedir
+    nodemon
+    diff-so-fancy
+)
+n stable
+npm install -g "${packages[@]}"
