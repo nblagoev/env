@@ -30,7 +30,7 @@ export BAT_THEME="TwoDark"
 
   # Add custom bin to $PATH
   [ -d ~/.bin ] && _extend_path "$HOME/.bin"
-  [ -d ~/.local/bin ] && _extend_path "~/.local/bin"
+  [ -d ~/.local/bin ] && _extend_path "$HOME/.local/bin"
   #[ -d ~/.npm-global ] && _extend_path "~/.npm-global/bin"
 # }}}
 

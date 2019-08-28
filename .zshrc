@@ -15,8 +15,6 @@ if [[ $TERM = dumb ]]; then
   unset zle_bracketed_paste
 fi
 
-[ -f "$DOTFILES/shell/functions.sh" ] && source "$DOTFILES/shell/functions.sh"
-
 # ALIASES {{{
   alias vim="nvim"
 

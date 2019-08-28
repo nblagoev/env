@@ -1,8 +1,6 @@
-bash
 bat
 cloc
 coreutils
-curl
 exa
 fasd
 fd
@@ -23,7 +21,6 @@ python2
 python3
 reattach-to-user-namespace
 ripgrep
-sudo
 tmux
 tree
 wget

@@ -152,5 +152,6 @@
   "prettier.quoteProps": "consistent",
   "prettier.endOfLine": "lf",
   "vrdev.buildTools.defaultVersion": "1.5.23",
-  "explorer.confirmDelete": false
+  "explorer.confirmDelete": false,
+  "sync.forceUpload": true
 }

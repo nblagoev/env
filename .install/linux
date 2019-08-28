@@ -1,17 +1,15 @@
 #!/bin/sh
 
-echo "# Ensure system is up to date"
-sudo apk update && sudo apk upgrade && sudo apk add git curl
-
 echo "# Installing yadm"
-mkdir -p ~/.local/bin
-curl -fLo ~/.local/bin/yadm \
+mkdir -p "$HOME/.local/bin"
+curl -fLo "$HOME/.local/bin/yadm" \
 	https://github.com/TheLocehiliosan/yadm/raw/master/yadm
-chmod a+x ~/.local/bin/yadm
+chmod a+x "$HOME/.local/bin/yadm"
+export PATH="$HOME/.local/bin:$PATH"
 
 echo "# Cloning the repo"
-~/.local/bin/yadm clone git@github.com:nblagoev/env.git
-~/.local/bin/yadm submodule update --init --recursive
+yadm clone https://github.com/nblagoev/env.git
+yadm submodule update --init --recursive
 
 echo "# Using yadm bootstrap to complete setup"
-~/.local/bin/yadm bootstrap
+yadm bootstrap
