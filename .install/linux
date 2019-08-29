@@ -10,6 +10,3 @@ export PATH="$HOME/.local/bin:$PATH"
 echo "# Cloning the repo"
 yadm clone https://github.com/nblagoev/env.git --bootstrap
 yadm submodule update --init --recursive
-
-echo "# Using yadm bootstrap to complete setup"
-yadm bootstrap

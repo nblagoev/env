@@ -61,8 +61,15 @@ else
       echo "Adding $APKREPO to /etc/apk/repositories"
       sed -i "/${APKREPO//\//\\/}/d" /etc/apk/repositories
       echo $APKREPO >> /etc/apk/repositories
-      $SUDO apk add --no-cache $(sed -e '/\s*#.*/d' ${HOME}/.install/packages/apk.txt)
+      $SUDO apk add --no-cache $(sed -e '/\s*#.*/d' ${HOME}/.install/packages/apk.txt) && \
+        rm /var/cache/apk/*
   fi
+
+  echo "Installing n"
+  curl -L https://git.io/n-install | bash
+
+  echo "Installing zplug"
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 fi
 
 # Setup ZSH
