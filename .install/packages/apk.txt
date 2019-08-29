@@ -1,4 +1,5 @@
 bat
+build-base
 cloc
 coreutils
 exa
@@ -21,5 +22,4 @@ ripgrep
 tmux
 tree
 wget
-yarn
 zsh
