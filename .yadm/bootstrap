@@ -30,6 +30,8 @@ if [ "$system_type" = "Darwin" ]; then
     brew doctor && brew bundle --file "$HOME/.install/packages/Brewfile"
   fi
 
+  n stable
+
   # Setup defaults
   echo "Setting macOS defaults"
   source "$HOME/.install/scripts/defaults"
@@ -68,9 +70,16 @@ else
   echo "Installing n"
   curl -L https://git.io/n-install | bash
 
+  n stable
+  echo "Installing yarn"
+  $SUDO apk add --no-cache yarn
+
   echo "Installing zplug"
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 fi
+
+echo "Installing node packages"
+npm install -g $(sed -e '/\s*#.*/d' ${HOME}/.install/packages/npm.txt)
 
 # Setup ZSH
 ZSH_PATH=$(which zsh)
@@ -133,7 +142,3 @@ if [ ! -d "$HOME/go" ]; then
   mkdir $HOME/go
   mkdir -p $HOME/go/bin $HOME/go/pkg $HOME/go/src
 fi
-
-# Bootstrap Node
-n stable
-npm install -g $(sed -e '/\s*#.*/d' ${HOME}/.install/packages/npm.txt)
