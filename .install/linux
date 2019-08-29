@@ -8,7 +8,7 @@ chmod a+x "$HOME/.local/bin/yadm"
 export PATH="$HOME/.local/bin:$PATH"
 
 echo "# Cloning the repo"
-yadm clone https://github.com/nblagoev/env.git
+yadm clone https://github.com/nblagoev/env.git --bootstrap
 yadm submodule update --init --recursive
 
 echo "# Using yadm bootstrap to complete setup"

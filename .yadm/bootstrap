@@ -7,6 +7,8 @@ if [ "$(id -u)" != "0" ] && command -v sudo; then
     SUDO=sudo
 fi
 
+set -e
+
 # Static Environment Configuration
 #   I found that some evaluations take time and slow down the loading of zsh, therefore,
 #   instead of evaluating in ~/.zshrc, I will do that during the bootstrap process.
@@ -53,12 +55,12 @@ if [ "$system_type" = "Darwin" ]; then
   echo "" >> "$host_env_static"
   echo "" >> "$host_env_static"
 else
-  echo '' >> /etc/sudoers
-  echo '## No password sudo' >> /etc/sudoers
-  echo 'nblagoev ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
   echo "Installing system utilities..."
   if command -v apk >/dev/null 2>&1; then
+      APKREPO="http://dl-cdn.alpinelinux.org/alpine/edge/testing/"
+      echo "Adding $APKREPO to /etc/apk/repositories"
+      sed -i "/${APKREPO//\//\\/}/d" /etc/apk/repositories
+      echo $APKREPO >> /etc/apk/repositories
       $SUDO apk add --no-cache $(sed -e '/\s*#.*/d' ${HOME}/.install/packages/apk.txt)
   fi
 fi

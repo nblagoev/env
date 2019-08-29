@@ -4,12 +4,10 @@ RUN apk update && apk upgrade && apk add \
     bash curl git sudo
 RUN echo "%root ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/root
 
-RUN adduser -DG root self
+WORKDIR /home/root
 
-WORKDIR /home/self
+COPY . .
 
-USER self
-
-RUN curl -fsSL https://raw.githubusercontent.com/nblagoev/env/master/.install/linux | sh
+RUN ./linux
 
 CMD ["/bin/zsh"]
