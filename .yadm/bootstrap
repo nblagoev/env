@@ -68,7 +68,7 @@ else
   fi
 
   echo "Installing n"
-  curl -L https://git.io/n-install | bash
+  curl -L https://git.io/n-install | bash -s -- -y
 
   n stable
   echo "Installing yarn"
