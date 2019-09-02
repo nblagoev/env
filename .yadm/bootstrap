@@ -68,7 +68,9 @@ else
   fi
 
   echo "Installing n"
+  export SHELL=/bin/bash
   curl -L https://git.io/n-install | bash -s -- -y
+  source ~/.bashrc
 
   n stable
   echo "Installing yarn"
