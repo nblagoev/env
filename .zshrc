@@ -266,6 +266,10 @@ fi
   eval "$(fasd --init auto)"
 # }}}
 
+# starship {{{
+  eval "$(starship init zsh)"
+# }}}
+
 # pet {{{
 
 function prev() {
@@ -298,7 +302,7 @@ bindkey '^s' pet-select
   zplug hlissner/zsh-autopair
   #zplug akoenig/npm-run.plugin.zsh
 
-  zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, as:theme
+  #zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, as:theme
 # }}}
 
 # FZF {{{

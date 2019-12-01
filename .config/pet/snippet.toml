@@ -1,0 +1,4 @@
+[[snippets]]
+  description = "Run shell in docker container"
+  command = "docker exec -it <mycontainer> bash"
+  output = ""

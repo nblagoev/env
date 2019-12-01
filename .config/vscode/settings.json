@@ -57,14 +57,9 @@
   "gitlens.advanced.messages": {
     "suppressShowKeyBindingsNotice": true
   },
-  "gitlens.views.compare.location": "scm",
-  "gitlens.views.fileHistory.location": "scm",
   "gitlens.views.lineHistory.enabled": false,
-  "gitlens.views.lineHistory.location": "scm",
   "gitlens.views.repositories.files.layout": "tree",
-  "gitlens.views.repositories.location": "scm",
   "gitlens.views.search.enabled": false,
-  "gitlens.views.search.location": "scm",
 
   "problems.decorations.enabled": true,
   "search.exclude": {
@@ -103,6 +98,8 @@
   "vrdev.experimental.typescript": true,
   "vrdev.tasks.exclude": ["com.vmware.pscoe.library*"],
   "vrdev.views.explorer.actions.layout": "compact",
+  "vrdev.buildTools.defaultVersion": "1.7.1",
+  "vrdev.log": "debug",
 
   "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
   "window.zoomLevel": 0,
@@ -122,6 +119,10 @@
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.statusBar.feedback.visible": false,
+
+  "sundial.nightTheme": "Monokai Pro",
+  "sundial.dayTheme": "Github",
+  "sundial.systemTheme": true,
 
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 
@@ -145,13 +146,25 @@
     "enhancedHover": true // experimental to improve quality of hover (will be on by default soon)
   },
 
-  "workbench.colorTheme": "Monokai Pro",
-
   "prettier.printWidth": 120,
   "prettier.tabWidth": 4,
   "prettier.quoteProps": "consistent",
   "prettier.endOfLine": "lf",
-  "vrdev.buildTools.defaultVersion": "1.5.23",
   "explorer.confirmDelete": false,
-  "sync.forceUpload": true
+  "sync.forceUpload": true,
+  "workbench.activityBar.visible": true,
+  "yaml.schemas": {
+    "file:///Users/blagoevn/.vscode-insiders/extensions/atlassian.atlascode-2.1.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  },
+  "atlascode.jira.jqlList": [
+    {
+      "id": "9d1e6d0e-c051-480f-9f83-755810925e0a",
+      "enabled": true,
+      "name": "My jira.pscoe.vmware.com Issues",
+      "query": "assignee = currentUser() ORDER BY lastViewed DESC ",
+      "siteId": "jira.pscoe.vmware.com",
+      "monitor": true
+    }
+  ],
+  "workbench.colorTheme": "Monokai Pro"
 }
