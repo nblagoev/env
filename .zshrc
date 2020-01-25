@@ -298,6 +298,10 @@ bindkey '^s' pet-select
   zplug zsh-users/zsh-autosuggestions
 
   zplug "plugins/gulp", from:oh-my-zsh
+  zplug "plugins/kubectl", from:oh-my-zsh
+  zplug "plugins/docker", from:oh-my-zsh
+  zplug "plugins/git", from:oh-my-zsh, nice:10
+  zplug "plugins/httpie",   from:oh-my-zsh, nice:10
 
   zplug hlissner/zsh-autopair
   #zplug akoenig/npm-run.plugin.zsh
