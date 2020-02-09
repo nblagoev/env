@@ -16,7 +16,7 @@
 
   "editor.cursorBlinking": "phase",
   "editor.cursorSmoothCaretAnimation": true,
-  "editor.fontFamily": "'Fira Code', 'Source Code Pro', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Source Code Pro', Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.formatOnPaste": true,
   "editor.formatOnType": true,
@@ -52,7 +52,7 @@
 
   "git.autofetch": true,
   "git.confirmSync": false,
-  "githubPullRequests.showInSCM": true,
+  "githubPullRequests.showInSCM": false,
 
   "gitlens.advanced.messages": {
     "suppressShowKeyBindingsNotice": true
@@ -120,9 +120,9 @@
   "workbench.startupEditor": "newUntitledFile",
   "workbench.statusBar.feedback.visible": false,
 
-  "sundial.nightTheme": "Monokai Pro",
-  "sundial.dayTheme": "Github",
-  "sundial.systemTheme": true,
+  "workbench.preferredDarkColorTheme": "Monokai Pro",
+  "workbench.preferredLightColorTheme": "Github",
+  "window.autoDetectColorScheme": true,
 
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 
@@ -154,7 +154,7 @@
   "sync.forceUpload": true,
   "workbench.activityBar.visible": true,
   "yaml.schemas": {
-    "file:///Users/blagoevn/.vscode-insiders/extensions/atlassian.atlascode-2.2.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/blagoevn/.vscode-insiders/extensions/atlassian.atlascode-2.4.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
@@ -166,5 +166,6 @@
       "monitor": true
     }
   ],
-  "workbench.colorTheme": "Monokai Pro"
+  "workbench.colorTheme": "Github",
+  "editor.semanticHighlighting.enabled": true
 }

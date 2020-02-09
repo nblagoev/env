@@ -18,8 +18,8 @@ fi
 # ALIASES {{{
   alias vim="nvim"
 
-  alias ll='exa -ghlFa --group-directories-first --color-scale --git'
-  alias lt='exa -ghlFT --color-scale --git'
+  alias ll='exa -ghlFa --group-directories-first --git'
+  alias lt='exa -ghlFT --git'
 
   alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
   alias ..='cd ../'                           # Go back 1 directory level
@@ -66,10 +66,6 @@ fi
   alias tn='tmux new -s "${$(basename `PWD`)//./}" || tmux at -t "${$(basename `PWD`)//./}"'
   alias attach="tmux attach -t"
   alias clearTmux="clear && printf '\e[3J'"
-
-  # My IP
-  alias myip='curl -s https://4.ifcfg.me/'
-  alias mylocalip='ifconfig | sed -En "s/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p"'
 
   # Download file with original filename
   alias get="curl -O -L"
@@ -225,43 +221,6 @@ fi
 
 # }}}
 
-### Oh-My-Zsh {{{
-  SPACESHIP_DIR_TRUNC=0
-  SPACESHIP_EXIT_CODE_SHOW=true
-  SPACESHIP_KUBECONTEXT_SHOW=false
-  SPACESHIP_EMBER_SHOW=false
-  SPACESHIP_DOTNET_SHOW=false
-  SPACESHIP_PYENV_SHOW=false
-  SPACESHIP_CONDA_SHOW=false
-  SPACESHIP_VENV_SHOW=false
-  SPACESHIP_AWS_SHOW=false
-  SPACESHIP_DOCKER_SHOW=false
-  SPACESHIP_JULIA_SHOW=false
-  SPACESHIP_HASKELL_SHOW=false
-  SPACESHIP_RUST_SHOW=false
-  SPACESHIP_PHP_SHOW=false
-  SPACESHIP_GOLANG_SHOW=false
-  SPACESHIP_GOLANG_SHOW=false
-  SPACESHIP_XCODE_SHOW_LOCAL=false
-  SPACESHIP_ELIXIR_SHOW=false
-  SPACESHIP_RUBY_SHOW=false
-  SPACESHIP_NODE_SHOW=false
-  SPACESHIP_PACKAGE_SHOW=false
-  SPACESHIP_HOST_PREFIX="at  "
-  SPACESHIP_BATTERY_SHOW=false
-  COMPLETION_WAITING_DOTS=true
-
-  # Uncomment the following line to enable command auto-correction.
-  # ENABLE_CORRECTION="true"
-
-  # Uncomment the following line if you want to disable marking untracked files
-  # under VCS as dirty. This makes repository status check for large repositories
-  # much, much faster.
-  # DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-  #source $ZSH/oh-my-zsh.sh
-### }}}
-
 # fasd {{{
   eval "$(fasd --init auto)"
 # }}}
@@ -300,8 +259,8 @@ bindkey '^s' pet-select
   zplug "plugins/gulp", from:oh-my-zsh
   zplug "plugins/kubectl", from:oh-my-zsh
   zplug "plugins/docker", from:oh-my-zsh
-  zplug "plugins/git", from:oh-my-zsh, nice:10
-  zplug "plugins/httpie",   from:oh-my-zsh, nice:10
+  zplug "plugins/git", from:oh-my-zsh, defer:3
+  zplug "plugins/httpie",   from:oh-my-zsh, defer:3
 
   zplug hlissner/zsh-autopair
   #zplug akoenig/npm-run.plugin.zsh
@@ -612,12 +571,6 @@ function gitlog() {
       --bind "ctrl-m:execute:
                 echo '{}' | grep -o '[a-f0-9]\{7\}' | head -1 |
                 xargs -I % sh -c 'git show --color=always % | less -R'"
-}
-
-function chromep() {
-	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
-	 	--proxy-server="socks5://127.0.0.1:5678" \
-		--host-resolver-rules="MAP * 0.0.0.0 , EXCLUDE localhost"
 }
 
 # }}}

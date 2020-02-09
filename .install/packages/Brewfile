@@ -63,8 +63,8 @@ brew 'zsh'
 
 ## Fonts
 cask 'font-fira-code'
-cask 'font-roboto-mono'
-cask 'font-roboto-mono-for-powerline'
+cask 'font-jetbrains-mono'
+cask 'font-cascadia-mono'
 cask 'font-source-code-pro'
 cask 'font-source-code-pro-for-powerline'
 
